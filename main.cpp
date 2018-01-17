@@ -1,4 +1,5 @@
 #include "al/core/app/al_App.hpp"
+#include "al/core/graphics/al_Shapes.hpp"
 
 // VTK includes
 #include <ExternalVTKWidget.h>
@@ -30,7 +31,7 @@ public:
 
 	MyApp(): phase(0){
 
-		// addSphere(mesh);
+		addSphere(mesh);
 		nav().pos(0,0,4);
 		// initWindow(Window::Dim(0,0, 600,400), "VTK example", 40);
 		// background(HSV(0.5, 1, 0.5));
@@ -46,14 +47,17 @@ public:
 	}
 
     virtual void onCreate() override {
+
+        renWin->Print(std::cout);
         // configure the external VTK widget
         externalVTKWidget->SetRenderWindow(renWin.GetPointer());
-
+        externalVTKWidget->Print(std::cout);
         // Connect the mapper to the actor
         actor->SetMapper(mapper.GetPointer());
 
         // Add actor to renderer
         vtkRenderer* ren = externalVTKWidget->AddRenderer();
+        ren->Print(std::cout);
         ren->AddActor(actor.GetPointer());
 
         // Create a source and connect it to the mapper
